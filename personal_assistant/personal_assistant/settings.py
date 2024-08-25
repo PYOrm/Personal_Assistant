@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "crispy_bootstrap4",
     "crispy_forms",
-    "users"
+    "users",
+    "latest_news",
 ]
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
@@ -129,7 +130,9 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
-
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
 STATIC_URL = 'static/'
 
 # Default primary key field type
