@@ -15,10 +15,8 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -30,7 +28,6 @@ SECRET_KEY = 'django-insecure-c#4sm0yyn(r9gxpv3j7_@^dl(z2q2+uuke0=xz5**c%tjsvv#i
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -79,23 +76,19 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'personal_assistant.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-
-
 DATABASES = {
     'default': {
-        'ENGINE': os.getenv("DB_ENGINE"),
-        'NAME': os.getenv("DB_NAME"),
-        'USER': os.getenv("DB_USER"),
-        'PASSWORD': os.getenv("DB_PASSWORD"),
-        'HOST': os.getenv("DB_HOST"),
-        'PORT': os.getenv("DB_PORT"),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',  
+        'USER': 'postgres',  
+        'PASSWORD': 'postgres',  
+        'HOST': 'localhost',  
+        'PORT': '5432',  
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -115,7 +108,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
@@ -126,7 +118,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
