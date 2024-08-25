@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "crispy_forms",
     "users",
     "latest_news",
+    "notes",
 ]
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
@@ -81,12 +82,12 @@ WSGI_APPLICATION = 'personal_assistant.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',  
-        'USER': 'postgres',  
-        'PASSWORD': 'postgres',  
-        'HOST': 'localhost',  
-        'PORT': '5432',  
+        'ENGINE': os.getenv("DB_ENGINE"),
+        'NAME': os.getenv("DB_NAME"),
+        'USER': os.getenv("DB_USER"),
+        'PASSWORD': os.getenv("DB_PASSWORD"),
+        'HOST': os.getenv("DB_HOST"),
+        'PORT': os.getenv("DB_PORT"),
     }
 }
 
