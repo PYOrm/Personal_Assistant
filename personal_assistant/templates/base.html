@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Site made with Mobirise Online Website Builder v5.9.13, https://a.mobirise.com -->
+  <meta charset="UTF-8">
+    {% load static %}
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+  <link rel="shortcut icon" href="{% static 'graphics/TeamLogo.png'%}" type="image/x-icon">
+  <title>{% block title %}Title{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'styles/style.css' %}">
+  <link rel="stylesheet" href="{% static 'styles/mbrs.css' %}">
+  <link rel="stylesheet" href="{% static 'styles/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'styles/bootstrap-grid.min.css' %}">
+  <link rel="stylesheet" href="{% static 'styles/bootstrap-reboot.min.css' %}">
+  <link rel="stylesheet" href="{% static 'styles/mbrs_add.css' %}" type="text/css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;700&amp;display=swap&amp;display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;700&display=swap&display=swap"></noscript>
+
+</head>
+
+<body class="">
+  <section data-bs-version="5.1" class="menu menu2 cid-umni2txHqA" once="menu" id="menu-5-umni2txHqA">
+
+	<nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
+
+<div id="jarallax-container-0" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; overflow: hidden; z-index: -100;">
+    <div style="background-position: 50% 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: {% block img %}{% endblock %};
+    position: absolute; top: 0px; left: 0px; width: 100%;
+    height: 498.4px; overflow: hidden;
+    pointer-events: none; transform-style: preserve-3d;
+    backface-visibility: hidden; will-change: transform, opacity;
+    margin-top: 217.8px; transform: translate3d(0px, -217.8px, 0px);">
+
+    </div>
+</div>
+
+		<div class="container">
+			<div class="navbar-brand">
+
+
+			</div>
+			<div class="navbar-collapse collapse" id="navbarSupportedContent" style="">
+				<ul class="navbar-nav nav-dropdown navbar-nav-top-padding" data-app-modern-menu="true"><li class="nav-item">
+                    {% if user.is_authenticated %}
+						<a class="nav-link link text-white text-primary display-4" href="page13.html">Нотатки</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link link text-white text-primary display-4" href="page12.html" aria-expanded="false">Контакти</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link link text-white text-primary display-4" href="page16.html">Файлообмінник</a>
+					</li>
+                    {% endif %}
+                    <li class="nav-item"><a class="nav-link link text-white text-primary display-4" href="{%url 'news:index'%}">Новини</a></li>
+                    <li class="nav-item"><a class="nav-link link text-white text-primary display-4" href="{%url 'news:our_team'%}">Команда</a></li></ul>
+
+				<div class="navbar-buttons mbr-section-btn">
+                    {% if user.is_authenticated %}
+                        <div class="img-wrapper mt-4 mb-2">
+							<img src="{% static 'graphics/TeamLogo.png'%}" data-slide-to="2" data-bs-slide-to="1" alt="">
+						</div>
+                        <p class="card-title mbr-fonts-style display-7">
+                            {{user.fullname}}
+						</p>
+                        <form action="{% url 'logout' %}" method="post">
+                            {% csrf_token %}
+                            <button class="tag" type="submit">Logout</button>
+                        </form>
+                    {% else %}
+                        <a class="btn btn-white display-4" href="{% url 'users:login' %}">Login/Sign Up</a>
+                    {% endif %}
+
+                </div>
+			</div>
+		</div>
+	</nav>
+</section>
+
+<section data-bs-version="5.1" class="header18 cid-umni2tBPy6 mbr-parallax-background" id="hero-16-umni2tBPy6" style="z-index: 0; background-image: none; position: relative;">
+
+{% block submenu %} {% endblock %}
+</section>
+
+<section data-bs-version="5.1" class="article021 cid-umnP9AStXb" id="article21-3">
+    {% block content %} {% endblock %}
+</section>
+
+<section data-bs-version="5.1" class="footer4 cid-umni2tMTbg" once="footers" id="footer-4-umni2tMTbg">
+    <div class="container">
+        <div class="media-container-row align-center mbr-white">
+            <div class="col-12">
+                <p class="mbr-text mb-0 mbr-fonts-style display-7">© 2024 БекПітон<br><br></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+  <script src="{% static 'js/jquery-3.7.1.min.js'%}"></script>
+  <script src="{% static 'js/bootstrap.bundle.min.js'%}"></script>
+  <script src="{% static 'js/parallax.js'%}"></script>
+<!--  <script src="https://r.mobirisesite.com/645005/assets/smoothscroll/smooth-scroll.js?rnd=1724560067191"></script>-->
+<!--  <script src="https://r.mobirisesite.com/645005/assets/ytplayer/index.js?rnd=1724560067191"></script>-->
+<!--  <script src="https://r.mobirisesite.com/645005/assets/dropdown/js/navbar-dropdown.js?rnd=1724560067191"></script>-->
+<!--  <script src="https://r.mobirisesite.com/645005/assets/theme/js/script.js?rnd=1724560067191"></script>-->
+
+</body>
+</html>
