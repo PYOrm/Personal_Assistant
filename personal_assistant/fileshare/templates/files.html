@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}File Share{% endblock %}
+{% block img %}url(&quot;{% static 'fileshare.png'%}&quot;){% endblock %}
+{% block submenu %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12 col-lg-9">
+                <div class="mbr-section-btn align-center">
+                    <form action="/action_page.php">
+                        <input type="file" id="myFile" name="filename">
+                        <input type="submit">
+                        <button type="submit" class="btn btn-info display-7">Upload</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-12 col-lg-9">
+                <div class="mbr-section-btn align-center">
+                    TODO search file name and filter file type
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+      <div class="card col-md-12 col-lg-12">
+        <div class="card-wrapper">
+          <div class="row justify-content-center">
+            <div class="col-12 mb-5 content-head">
+              <h3 class="card-title mbr-fonts-style mbr-white mt-3 display-2"><strong>Files:</strong></h3>
+            </div>
+          </div>
+            {% for file in files %}
+          <div class="row justify-content-left item features-without-image mt-0 mb-5">
+            <div class="col-12 col-md-12 col-lg-3">
+                <div class="img-wrapper mt-4 mb-2">
+                    <img src="{% static 'graphics/TeamLogo.png'%}" data-slide-to="2" data-bs-slide-to="1" alt="">
+                </div>
+            </div>
+            <div class="col-md-12 col-lg item-wrapper">
+              <p class="mbr-text mbr-fonts-style mt-0 mb-0 display-7">
+                  {{file.name}}
+              </p>
+              <div class="soc-item col-auto">
+                  <a href="{% url 'fileshare:download' %}" target="_blank" class="social__link" download>
+                     <span class="mbr-iconfont mobi-mbri-download-2 mobi-mbri"></span>
+                  </a>
+              </div>
+            </div>
+          </div>
+            {% endfor %}
+
+        </div>
+      </div>
+    </div>
+{% endblock %}
+
