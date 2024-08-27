@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %} User Autorization {% endblock %}
+{% block title %} User Authorization {% endblock %}
 {% load static %}
 {% block img %}url(&quot;{% static 'notes.png'%}&quot;){% endblock %}
 {% block submenu %}
@@ -7,62 +7,105 @@
         <div class="row justify-content-center">
             <div class="col-md-12 col-lg-9">
                 <div class="mbr-section-btn align-center">
-					<a class="btn btn-secondary display-4" href="{% url 'notes:create_note'%}">Create new Note</a>
-					<a class="btn btn-secondary display-4" href="{% url 'notes:create_tag'%}">Create new Tag</a>
-				</div>
+                    <a class="btn btn-secondary display-4" href="{% url 'notes:create_note'%}">Create new Note</a>
+                    <a class="btn btn-secondary display-4" href="{% url 'notes:create_tag'%}">Create new Tag</a>
+                </div>
             </div>
         </div>
     </div>
 {% endblock %}
 {% block content %}
 <div class="container">
-		<div class="row mb-5 justify-content-center">
-			<div class="col-12 mb-0 content-head">
-				<h3 class="mbr-section-title mbr-fonts-style align-center mb-0 display-2">
-					<strong>Notes</strong></h3>
+    <div class="row mb-5 justify-content-center">
+        <div class="col-12 mb-0 content-head">
+            <h3 class="mbr-section-title mbr-fonts-style align-center mb-0 display-2">
+                <a href="{% url 'notes:notes' %}" style="color:#0aa3c2;">Notes</a>				
+            </h3>
+        </div>
+    </div>
 
-			</div>
-		</div>
+    <div class="row mbr-masonry" data-masonry="{&quot;percentPosition&quot;: true }" style="position: relative;">
+        {% for note in notes %}
+        <div class="item features-without-image col-12 col-md-6 col-lg-6 active" style="position: relative;">
+            <div class="item-wrapper">
+                <div class="card-box align-left">
+                    <h5 class="card-title mbr-fonts-style display-7">
+                        <strong>{{ note.title }}</strong>
+                    </h5>
+                    <p class="card-text mbr-fonts-style display-7">
+                        {{ note.body|truncatechars:50 }}
+                        <a href="{% url 'notes:detail_note' note.id %}" style="color:#ae1e2c;">Read more</a>
+                    </p>
+                    <div class="icons-menu row justify-content-right display-7">
+                        <p class="card-text mbr-fonts-style display-7">
+                            Tags:
+                        </p>
+                        {% for tag in note.tags.all %}
+                            <a href="?tag={{ tag.id }}" style="color:#ae1e2c;">{{ tag.body_tag }}</a>
+                        {% endfor %}
+                    </div>
+                    <div class="icons-menu row justify-content-center display-7 mt-4">
+                        <div class="align-center mbr-section-btn">
+                            <a href="{% url 'notes:edit_note' note.id %}" class="btn btn-info btn-rounded display-7 d-flex align-items-center">
+                                Edit
+                            </a>
+                        </div>
+                        <div class="align-center mbr-section-btn">
+                            <a href="{% url 'notes:delete_note' note.id %}" class="btn btn-danger btn-rounded display-7 d-flex align-items-center">
+                                Delete
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
 
-		<div class="row mbr-masonry" data-masonry="{&quot;percentPosition&quot;: true }" style="position: relative; height: 994.344px;">
-			{% for note in notes %}
-            <div class="item features-without-image col-12 col-md-6 col-lg-6 active" style="position: absolute; left: 0%; top: 0px;">
-                <div class="item-wrapper">
-					<div class="card-box align-left">
+    <!-- Фільтрація по тегам -->
+    <div class="container">
+        <div class="row justify-content-center mb-4">
+            <div class="col-md-6">
+                <form method="GET" class="form-inline d-flex justify-content-center">
+                    {{ form.as_p }}
+                    <div class="align-center mbr-section-btn">
+                        <button type="submit" class="btn btn-info btn-rounded display-7">Filter</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
-						<div class="icons-menu row justify-content-right display-7">
-							<div class="soc-item col-auto">
-								<a href="{% url 'notes:edit/{{note.id}}'%}" target="_blank" class="social__link">
-									<span class="mbr-iconfont mbri-edit"></span>
-								</a>
-							</div><div class="soc-item col-auto">
-								<a href="{% url 'notes:done/{{note.id}}'%}" target="_blank" class="social__link">
-									<span class="mbr-iconfont mobi-mbri-success mobi-mbri"></span>
-								</a>
-							</div><div class="soc-item col-auto">
-								<a href="{% url 'notes:delete/{{note.id}}'%}" target="_blank" class="social__link">
-									<span class="mbr-iconfont mbri-trash"></span>
-								</a>
-							</div>
-						</div>
-                        <h5 class="card-title mbr-fonts-style display-7">
-							<strong>{{note.name}}</strong>
-						</h5>
-						<p class="card-text mbr-fonts-style display-7">
-							{{note.text}}
-						</p>
-						<div class="icons-menu row justify-content-right display-7">
-							<p class="card-text mbr-fonts-style display-7">
-								Tags:
-							</p>
-							{% for tag in note.tags.all %}
-								<a href="#" class="text-primary">{{tag.name}}</a>
-							{% endfor %}
-						</div>
-					</div>
-				</div>
-			</div>
-			{% endfor %}
-		</div>
+    <!-- Пагінація -->
+    <div class="row justify-content-center mt-4">
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                {% if page_obj.has_previous %}
+                    <li class="page-item"><a class="page-link" href="?page=1{% if request.GET.tag %}&tag={{ request.GET.tag }}{% endif %}">First</a></li>
+                    <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if request.GET.tag %}&tag={{ request.GET.tag }}{% endif %}">Previous</a></li>
+                {% else %}
+                    <li class="page-item disabled"><a class="page-link">First</a></li>
+                    <li class="page-item disabled"><a class="page-link">Previous</a></li>
+                {% endif %}
+
+                {% for num in page_obj.paginator.page_range %}
+                    {% if page_obj.number == num %}
+                        <li class="page-item active"><a class="page-link">{{ num }}</a></li>
+                    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                        <li class="page-item"><a class="page-link" href="?page={{ num }}{% if request.GET.tag %}&tag={{ request.GET.tag }}{% endif %}">{{ num }}</a></li>
+                    {% endif %}
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                    <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}{% if request.GET.tag %}&tag={{ request.GET.tag }}{% endif %}">Next</a></li>
+                    <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}{% if request.GET.tag %}&tag={{ request.GET.tag }}{% endif %}">Last</a></li>
+                {% else %}
+                    <li class="page-item disabled"><a class="page-link">Next</a></li>
+                    <li class="page-item disabled"><a class="page-link">Last</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
 </div>
+
 {% endblock %}

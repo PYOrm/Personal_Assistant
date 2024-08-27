@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
-
-{% block title %}Creat Note{% endblock %}
+{% block title %}Delete Note{% endblock %}
 {% load static %}
 
 {% block img %}url(&quot;{% static 'notes.png' %}&quot;){% endblock %}
@@ -19,11 +18,12 @@
 
 {% block content %}
 <div class="container">
-    <form method="POST">
+    <h2>Are you sure you want to delete "<strong>{{ object }}</strong>"?</h2>
+    <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
         <div class="align-left mbr-section-btn">
-        <button type="submit" class="btn btn-info btn-rounded display-8 d-flex align-items-center">Save</button>
+            <button type="submit" class="btn btn-danger">Confirm</button>
+            <a href="{% url 'notes:notes' %}" class="btn btn-secondary">Cancel</a>
         </div>
     </form>
 </div>
