@@ -10,7 +10,6 @@ class Tag(models.Model):
     def __str__(self):
         return self.body_tag
 
-our
 class Note(models.Model):
     id = models.BigAutoField(primary_key=True)
     body = models.TextField()

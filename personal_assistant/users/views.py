@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login as auth_login
 from django.conf import settings
 import hashlib
+
+
 from .forms import RegisterForm, AuthenticationForm
 
 def get_gravatar_url(email, size=100):
@@ -31,5 +33,4 @@ def login(request):
     else:
         form = AuthenticationForm()
     return render(request, 'registration/login.html', {'form': form})
-
 
