@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "crispy_forms",
     "users",
     "latest_news",
+    "notes",
     "contacts",
 ]
 
