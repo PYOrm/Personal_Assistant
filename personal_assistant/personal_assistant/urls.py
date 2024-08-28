@@ -20,8 +20,8 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include("latest_news.urls")),
-    path('notes/', include('notes.urls')),
     path('users/', include("users.urls")),  # Виправлений шлях
+     path('notes/', include('notes.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('contacts/', include("contacts.urls")),  # Доданий шлях для додатку 'contacts'
 ]
