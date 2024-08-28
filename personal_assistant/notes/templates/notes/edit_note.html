@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Creat Note{% endblock %}
+{% block title %}Edit Note{% endblock %}
 {% load static %}
 
 {% block img %}url(&quot;{% static 'notes.png' %}&quot;){% endblock %}
@@ -18,13 +18,14 @@
 {% endblock %}
 
 {% block content %}
-<div class="container">
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <div class="align-left mbr-section-btn">
-        <button type="submit" class="btn btn-info btn-rounded display-8 d-flex align-items-center">Save</button>
-        </div>
-    </form>
-</div>
+    <div class="container">
+        <h2>Edit Note</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="align-left mbr-section-btn">
+                <button type="submit" class="btn btn-info me-2">Save changes</button>
+            </div>
+        </form>
+    </div>
 {% endblock %}
