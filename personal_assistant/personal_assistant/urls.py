@@ -21,5 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include("latest_news.urls")),
     path('users/', include("users.urls")),  # Виправлений шлях
-    path('accounts/', include('django.contrib.auth.urls'))
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('notes/', include('notes.urls')),
 ]

@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "users",
     "latest_news",
     "contacts",
+    "notes",
 ]
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
@@ -62,8 +63,7 @@ ROOT_URLCONF = 'personal_assistant.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        # 'DIRS': ["templates",],
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': ["templates",],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
