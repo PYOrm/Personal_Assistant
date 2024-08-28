@@ -12,6 +12,8 @@ sqlalchemy = "^2.0.32"
 crispy-bootstrap4 = "^2024.1"
 python-dotenv = "^1.0.1"
 psycopg2 = "^2.9.9"
+beautifulsoup4 = "^4.12.3"
+requests = "^2.32.3"
 
 
 [build-system]
