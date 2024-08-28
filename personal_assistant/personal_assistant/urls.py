@@ -21,7 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include("latest_news.urls")),
     path('users/', include("users.urls")),  # Виправлений шлях
-     path('notes/', include('notes.urls')),
+    path('notes/', include('notes.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('contacts/', include("contacts.urls")),  # Доданий шлях для додатку 'contacts'
+    path('contacts/', include("contacts.urls")),  # Доданий шлях для додатку 'contacts' - contactS чи contact
 ]
