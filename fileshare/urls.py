@@ -1,7 +1,11 @@
 from django.urls import path
 from . import views
 
+app_name = 'fileshare'
+
 urlpatterns = [
-    path('upload/', views.upload_file, name='upload_file'),
-    path('files/', views.file_list, name='file_list'),
+    path('', views.index, name='index'),
+    path('upload/', views.upload, name='upload'),
+    path('download/<int:file_id>/', views.download, name='download'),
+    path('delete/<int:file_id>/', views.delete, name='delete'),
 ]
