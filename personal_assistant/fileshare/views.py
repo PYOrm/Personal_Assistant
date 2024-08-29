@@ -14,8 +14,8 @@ def upload_file(request):
             return redirect('file_list')
     else:
         form = FileUploadForm()
-    return render(request, 'upload_file.html', {'form': form})
 
+    return render(request, 'upload_file.html', {'form': form})
 @login_required
 def file_list(request):
     files = File.objects.filter(user=request.user)
