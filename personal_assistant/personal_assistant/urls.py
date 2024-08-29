@@ -21,4 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include("latest_news.urls")),
     path('users/', include("users.urls")),  # Виправлений шлях
+    path('fileshare/', include("fileshare.urls")),
+    path('contacts/', include("contacts.urls")),
 ]
