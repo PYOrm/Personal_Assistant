@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "latest_news",
     "notes",
     "contacts",
+    "fileshare",
 ]
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"

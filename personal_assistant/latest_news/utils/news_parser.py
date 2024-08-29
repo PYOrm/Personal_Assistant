@@ -1,11 +1,16 @@
+import datetime
 
 import requests
 from bs4 import BeautifulSoup
 
 # from personal_assistant.latest_news.models import Forex
-
-currency_url = "https://kurs.com.ua/#main_table"
-news_url = "#"
+date = datetime.date.today()
+month = ("0" + date.month.__str__())[len("0" + date.month.__str__())-2::]
+day = ("0" + date.day.__str__())[len("0" + date.day.__str__())-2::]
+print(month)
+print(day)
+page = 1
+news_url = f"https://podrobnosti.ua/archive/important/{date.year}/{month}/{day}/all/all/page{page}"
 
 
 class Forex:
@@ -43,4 +48,4 @@ def get_currency(url) -> list[Forex]:
 
 
 if __name__ == "__main__":
-    get_currency(currency_url)
+    get_currency(news_url)
