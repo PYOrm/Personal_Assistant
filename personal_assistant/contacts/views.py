@@ -21,7 +21,7 @@ def contact_create(request):
             contact = form.save(commit=False)
             contact.owner = request.user
             contact.save()
-            return redirect('contact_detail', pk=contact.pk)
+            return redirect('contacts/contact_detail,html', pk=contact.pk)
     else:
         form = ContactForm()
     return render(request, 'contacts/contact_form.html', {'form': form})
