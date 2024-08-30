@@ -10,7 +10,7 @@ def index(request):
     else:
         files = File.objects.all()
 
-    return render(request, 'fileshare/fileshare.html', {'files': files})
+    return render(request, 'fileshare.html', {'files': files})
 
 def upload(request):
     if request.method == 'POST':
@@ -20,7 +20,7 @@ def upload(request):
             return redirect('fileshare:index')
     else:
         form = FileUploadForm()
-    return render(request, 'fileshare/fileshare.html', {'form': form})
+    return render(request, 'fileshare.html', {'form': form})
 
 def download(request, file_id):
     file = get_object_or_404(File, id=file_id)
