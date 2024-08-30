@@ -1,8 +1,17 @@
+from django.contrib.auth.views import PasswordResetView
+from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import render, redirect
 from django.contrib.auth import login as auth_login
+from django.contrib.auth import get_user_model
+from django.contrib.auth.tokens import default_token_generator as token_generator
 from django.conf import settings
+from django.contrib import messages
+from django.utils.http import urlsafe_base64_decode
 import hashlib
 
+from django.views import View
+from .utils import send_email_for_verify
+from django.urls import reverse_lazy
 
 from .forms import RegisterForm, AuthenticationForm
 
@@ -15,9 +24,10 @@ def register(request):
         form = RegisterForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
-            user.is_active = True
+            # user.is_active = True
             user.avatar_url = get_gravatar_url(user.email)
             user.save()
+            send_email_for_verify(request, user)
             return redirect('users:login')
     else:
         form = RegisterForm()
@@ -32,5 +42,33 @@ def login(request):
             return redirect(settings.LOGIN_REDIRECT_URL)
     else:
         form = AuthenticationForm()
-    return render(request, 'registration/login.html', {'form': form})
+    return render(request, 'users/login.html', {'form': form})
+
+
+
+class ResetPasswordView(SuccessMessageMixin, PasswordResetView):
+    template_name = 'users/password_reset.html'
+    email_template_name = 'users/password_reset_email.html'
+    html_email_template_name = 'users/password_reset_email.html'
+    success_url = reverse_lazy('users:password_reset_done')
+    success_message = "An email with instructions to reset your password has been sent to %(email)s."
+    subject_template_name = 'users/password_reset_subject.txt'
+
+class EmailVerify(View):
+    def get(self, request, uidb64, token):
+        User = get_user_model()
+        try:
+            uid = urlsafe_base64_decode(uidb64).decode()
+            user = User.objects.get(pk=uid)
+        except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+            user = None
+
+        if user is not None and token_generator.check_token(user, token):
+            user.is_active = True
+            user.save()
+            messages.success(request, 'Email verified successfully. You can now log in.')
+            return redirect('users:login')
+        else:
+            messages.error(request, 'Verification link is invalid or expired.')
+            return redirect('users:register')
 
