@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}Contacts{% endblock %} 
+{% block title %}Contacts{% endblock %}
 
 {% load static %}
 {% block img %}url(&quot;{% static 'contacts.png'%}&quot;){% endblock %}
@@ -9,24 +9,54 @@
         <div class="row justify-content-center">
             <div class="col-md-12 col-lg-9">
                 <div class="mbr-section-btn align-center">
-					<a class="btn btn-secondary display-4" href="{% url 'contacts:contact_create'%}">Create new Contact</a>
-				</div>
+                    <a class="btn btn-secondary display-4" href="{% url 'contacts:contact_create'%}">Create new Contact</a>
+                </div>
             </div>
         </div>
     </div>
 {% endblock %}
 
 {% block content %}
+<div class="container">
+    <div class="row mb-5 justify-content-center">
+        <div class="col-12 mb-0 content-head">
+          <h3 class="mbr-section-title mbr-fonts-style align-center mb-0 display-2">
+          <a href="{% url 'contacts:contact_list' %}" style="color:#0aa3c2;">Contacts</a>	
+          </h3>
+        </div>
+    </div>
+    <!-- Форма для пошуку контактів -->
+    <div class="align-center mbr-section-btn">
+      <form method="get" class="form-inline d-flex">
+          <div class="form-group mb-2">
+              <label class="sr-only" for="search">Search contacts by name:</label>
+              <input type="text" name="search" id="search" class="form-control" placeholder="Search by name" value="{{ request.GET.search }}" style="max-width: 350px;">
+          </div>
+          <button type="submit" class="btn btn-info btn-rounded display-8 d-flex align-items-center">Search</button>
+          <a href="{% url 'contacts:contact_list' %}" class="btn btn-secondary mb-2 ml-2">Cancel</a>
+      </form>
+    </div>
 
-<h1>Contacts</h1>
-<a href="{% url 'contacts:contact_create' %}" class="btn btn-primary mb-3"
-  >Add New Contact</a
->
-<ul class="list-group">
-  {% for contact in contacts %}
-  <li class="list-group-item">
-    <a href="{% url 'contact_detail' contact.pk %}">{{ contact.name }}</a>
-  </li>
-  {% endfor %}
-</ul>
+    <!-- Список контактов -->
+    <ul class="list-group">
+        {% for contact in contacts %}
+        <li class="list-group-item">
+            <a href="{% url 'contacts:contact_detail' contact.pk %}">{{ contact.id }}. {{ contact.name }}, {{ contact.date }}</a>
+        </li>
+        {% empty %}
+        <li class="list-group-item">No contacts found.</li>
+        {% endfor %}
+    </ul>
+        <!-- фільтрація контактов -->
+      <div class="align-center mbr-section-btn">
+          <form method="get" class="form-inline d-flex">
+              <div class="form-group mb-2">
+                  <label class="sr-only" for="days">Show contacts with birthdays in the next:</label>
+                  <input type="number" name="days" id="days" class="form-control" placeholder="Enter number of days" min="1" required style="max-width: 350px;">
+              </div>
+              <button type="submit" class="btn btn-info btn-rounded display-8 d-flex align-items-center">Filter</button>
+              <a href="{% url 'contacts:contact_list' %}" class="btn btn-secondary mb-2 ml-2">Cancel</a>
+          </form>
+      </div>
+</div>
 {% endblock %}
