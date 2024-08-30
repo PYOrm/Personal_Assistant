@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "latest_news",
     "notes",
     "contacts",
+    "fileshare",
 ]
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
@@ -63,8 +64,7 @@ ROOT_URLCONF = 'personal_assistant.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        # 'DIRS': ["templates",],
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': ["templates",],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -139,11 +139,12 @@ AUTH_USER_MODEL = 'users.User'
 LOGIN_REDIRECT_URL = '/'
 
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.example.com'
-EMAIL_PORT = 465
+EMAIL_BACKEND = os.getenv("EMAIL_BACKEND")
+EMAIL_HOST = os.getenv("EMAIL_HOST")
+EMAIL_PORT = os.getenv("EMAIL_PORT")
+EMAIL_STARTTLS = False
 EMAIL_USE_SSL = True
 EMAIL_USE_TLS = False
-EMAIL_HOST_USER = 'testuser11@meta.ua'
-EMAIL_HOST_PASSWORD = 'Test1234'
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
+DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL")

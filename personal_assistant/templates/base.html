@@ -25,18 +25,18 @@
 
 	<nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
 
-<!--<div id="jarallax-container-0" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; overflow: hidden; z-index: -100;">-->
-<!--    <div style="background-position: 50% 50%;-->
-<!--    background-size: cover;-->
-<!--    background-repeat: no-repeat;-->
-<!--    background-image: {% block img %}{% endblock %};-->
-<!--    position: absolute; top: 0px; left: 0px; width: 100%;-->
-<!--    height: 498.4px; overflow: hidden;-->
-<!--    pointer-events: none; transform-style: preserve-3d;-->
-<!--    backface-visibility: hidden; will-change: transform, opacity;-->
-<!--    margin-top: 217.8px; transform: translate3d(0px, -217.8px, 0px);">-->
+<div id="jarallax-container-0" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; overflow: hidden; z-index: -100;">
+    <div style="background-position: 50% 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: {% block img %}{% endblock %};
+    position: absolute; top: 0px; left: 0px; width: 100%;
+    height: 498.4px; overflow: hidden;
+    pointer-events: none; transform-style: preserve-3d;
+    backface-visibility: hidden; will-change: transform, opacity;
+    margin-top: 217.8px; transform: translate3d(0px, -217.8px, 0px);">
 
-<!--    </div>-->
+    </div>
 </div>
 
 		<div class="container">
@@ -47,19 +47,19 @@
 			<div class="navbar-collapse collapse" id="navbarSupportedContent" style="">
 				<ul class="navbar-nav nav-dropdown navbar-nav-top-padding" data-app-modern-menu="true"><li class="nav-item">
                     {% if user.is_authenticated %}
-						<a class="nav-link link text-white text-primary display-4" href="page13.html">Нотатки</a>
+						<a class="nav-link link text-white text-primary display-4" href="{%url 'notes:notes'%}">Нотатки</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link link text-white text-primary display-4" href="page12.html" aria-expanded="false">Контакти</a>
+						<a class="nav-link link text-white text-primary display-4" href="{%url 'contacts:contact_list'%}" aria-expanded="false">Контакти</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link link text-white text-primary display-4" href="page16.html">Файлообмінник</a>
+						<a class="nav-link link text-white text-primary display-4" href="{%url 'fileshare:file_list'%}">Файлообмінник</a>
 					</li>
                     {% endif %}
                     <li class="nav-item"><a class="nav-link link text-white text-primary display-4" href="{%url 'news:index'%}">Новини</a></li>
                     <li class="nav-item"><a class="nav-link link text-white text-primary display-4" href="{%url 'news:our_team'%}">Команда</a></li></ul>
 
-				<div class="navbar-buttons mbr-section-btn">
+				<div class=" navbar-buttons mbr-section-btn" style="display: flex;align-items: center;">
                     {% if user.is_authenticated %}
 <!--                        <div class="img-wrapper mt-4 mb-2">-->
 <!--							<img src="{% static 'graphics/TeamLogo.png'%}" data-slide-to="2" data-bs-slide-to="1" alt="">-->
@@ -68,13 +68,13 @@
                             {{user.username}}
 						</p>
                     {% if user.avatar_url %}
-                        <img src="{{ user.avatar_url }}" alt="{{ user.username }}" />
+                        <img src="{{ user.avatar_url }}" alt='{{ user.username }}' style='height:40px; width:40px' />
                     {% else %}
-                        <img src="https://www.gravatar.com/avatar/?d=mp" alt="{{ user.username }}" />
+                        <img src="https://www.gravatar.com/avatar/?d=mp" alt="{{ user.username }}" style='height:40px, width:40px' />
                     {% endif %}
                         <form method="post" action="{% url 'users:logout' %}">
                             {% csrf_token %}
-                            <button type="submit" class="btn btn-secondary display-4">Logout</button>
+                            <button type="submit" class="btn btn-sm display-4">Logout</button>
                         </form>
                     {% else %}
                         <a class="btn btn-white display-4" href="{% url 'users:login' %}">Login</a>

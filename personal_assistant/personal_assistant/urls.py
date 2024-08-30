@@ -25,5 +25,4 @@ urlpatterns = [
     path('notes/', include('notes.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('contacts/', include("contacts.urls")),  # Доданий шлях для додатку 'contacts'
-
 ]
