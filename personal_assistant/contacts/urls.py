@@ -1,6 +1,8 @@
 from django.urls import path
 from . import views
 
+app_name = "contacts"
+
 urlpatterns = [
     path('', views.contact_list, name='contact_list'),  # Перегляд списку контактів
     path('contact/<int:pk>/', views.contact_detail, name='contact_detail'),  # Перегляд одного контакту

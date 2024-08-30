@@ -1,8 +1,78 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}News{% endblock %}
-{% block img %}url(&quot;{% static 'news.png'%}&quot;){% endblock %}
+{% block img %}url(&quot;{% static 'news.jpg'%}&quot;){% endblock %}
 {% block submenu %}{% endblock %}
 {% block content %}
-Breaking News
+<div class="row">
+      <div mbr-class2="this | fakeFilter uname__41 _params.columns" class="item features-without-image col-12 col-md-3 item-mb col-lg-3">
+        <div class="item-wrapper">
+          <div class="card-box align-left">
+
+            <h5 class="card-title mbr-fonts-style display-5" mbr-if="this | fakeFilter uname__47 _params.showTitle" data-app-selector=".card-title, .iconfont-wrapper" mbr-class-var="uname__45" mbr-on-change-theme-style="uname__46" data-app-edit="content" mbr-static-html="uname__48" mbr-content-edit="uname__48" data-app-placeholder="Введите Текст" mbr-on-change-component-node="uname__49" data-class-var="display-5">
+              <b>Foreing Exchange</b>
+            </h5>
+            <p class="card-text mbr-fonts-style display-7" mbr-if="this | fakeFilter uname__52 _params.showText" data-app-selector=".card-text, .item .mbr-section-btn" mbr-class-var="uname__50" mbr-on-change-theme-style="uname__51" data-app-edit="content" mbr-static-html="uname__53" mbr-content-edit="uname__53" data-app-placeholder="Введите Текст" mbr-on-change-component-node="uname__54" data-class-var="display-7">
+              <table id="main_table" class="table-course negative-margin-767">
+                <thead>
+                  <tr>
+                    <th class="text-right-767">&nbsp;</th>
+                    <th class="text-right-767" colspan="2">Курс в банках</th>
+
+                  </tr>
+                </thead>
+                <tbody class="text-right">
+                {% for cur in currency %}
+                  <tr class=" ">
+                    <td class="uppercase condensed">
+                      <p class="dotted">{{cur.currency}}</p>
+                    </td>
+                    <td>
+                      <div class="course">{{cur.buy}}</div>
+                    </td>
+                    <td>
+                      <div class="course">{{cur.sell}}</div>
+                    </td>
+                  </tr>
+                {% endfor %}
+                </tbody>
+              </table>
+           </p>
+
+          </div>
+        </div>
+      </div>
+      <div mbr-class2="this | fakeFilter uname__61 _params.columns" class="item features-without-image col-12 col-md-9 item-mb col-lg-9">
+        <div class="item-wrapper">
+          <div class="card-box align-left">
+            <h5 class="card-title mbr-fonts-style display-5" mbr-if="this | fakeFilter uname__67 _params.showTitle" data-app-selector=".card-title, .iconfont-wrapper" mbr-class-var="uname__65" mbr-on-change-theme-style="uname__66" data-app-edit="content" mbr-static-html="uname__68" mbr-content-edit="uname__68" data-app-placeholder="Введите Текст" mbr-on-change-component-node="uname__69" data-class-var="display-5">
+              <b>News</b>
+            </h5>
+                  <p class="card-text mbr-fonts-style display-7" mbr-if="this | fakeFilter uname__72 _params.showText" data-app-selector=".card-text, .item .mbr-section-btn" mbr-class-var="uname__70" mbr-on-change-theme-style="uname__71" data-app-edit="content" mbr-static-html="uname__73" mbr-content-edit="uname__73" data-app-placeholder="Введите Текст" mbr-on-change-component-node="uname__74" data-class-var="display-7">
+                    <div class="news-list news-table ">
+                      <ul data-vr-zone="all">
+                        {% for new in news %}
+                        <li>
+                          <a href="{% url 'news:new' new.id %}">
+                            <div class="visual">
+                              <img src="{{ new.img_url }}" alt="{{ new.title }}" height="100" width="100">
+                            </div>
+                            <span class="news-title for-mobile" data-vr-headline="">{{ new.title }}</span>
+                            <div class="info" style="display:block;">
+                              <span class="news-title" data-vr-headline="">{{ new.title }}</span>
+                              <em class="date">{{ new.date }}</em>
+                              <p>{{ new.fulltext|truncatechars:50 }}</p>
+                            </div>
+                          </a>
+                        </li>
+                        {% endfor %}
+                      </ul>
+                    </div>
+                  </p>
+          </div>
+        </div>
+      </div>
+</div>
 {% endblock %}
+
+
