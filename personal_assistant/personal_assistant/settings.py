@@ -150,5 +150,6 @@ LOGIN_REDIRECT_URL = '/'
 # DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL")
 
 
+
 # to see messages in console extend of sending in throe the services
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
