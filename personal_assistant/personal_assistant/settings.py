@@ -42,7 +42,9 @@ INSTALLED_APPS = [
     "crispy_forms",
     "users",
     "latest_news",
+    "notes",
     "contacts",
+    "fileshare",
 ]
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
@@ -62,8 +64,7 @@ ROOT_URLCONF = 'personal_assistant.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        # 'DIRS': ["templates",],
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': ["templates",],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -141,14 +142,15 @@ ACCOUNT_EMAIL_REQUIRED = True
 LOGIN_REDIRECT_URL = '/'
 
 
+
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # EMAIL_HOST = os.getenv("EMAIL_HOST")
 # EMAIL_PORT = os.getenv("EMAIL_PORT")
+# EMAIL_STARTTLS = False
 # EMAIL_USE_SSL = os.getenv("EMAIL_USE_SSL")
 # EMAIL_HOST_USER = os.getenv("MAIL_HOST_USER")
 # EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 # DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL")
-
 
 
 # to see messages in console extend of sending in throe the services

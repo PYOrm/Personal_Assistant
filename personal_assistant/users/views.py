@@ -8,9 +8,11 @@ from django.conf import settings
 from django.contrib import messages
 from django.utils.http import urlsafe_base64_decode
 import hashlib
+
 from django.views import View
 from .utils import send_email_for_verify
 from django.urls import reverse_lazy
+
 from .forms import RegisterForm, AuthenticationForm
 
 def get_gravatar_url(email, size=100):
@@ -52,7 +54,6 @@ class ResetPasswordView(SuccessMessageMixin, PasswordResetView):
     success_message = "An email with instructions to reset your password has been sent to %(email)s."
     subject_template_name = 'users/password_reset_subject.txt'
 
-
 class EmailVerify(View):
     def get(self, request, uidb64, token):
         User = get_user_model()
@@ -70,3 +71,4 @@ class EmailVerify(View):
         else:
             messages.error(request, 'Verification link is invalid or expired.')
             return redirect('users:register')
+

@@ -1,0 +1,38 @@
+{% extends 'base.html' %} 
+{% block title %}Contact Details{% endblock %} 
+{% load static %}
+
+{% block img %}url(&quot;{% static 'contacts.png'%}&quot;){% endblock %}
+
+{% block submenu %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12 col-lg-9">
+                <div class="mbr-section-btn align-center">
+					<a class="btn btn-secondary display-4" href="{% url 'contacts:contact_create'%}">Create new Contact</a>
+				</div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block content %}
+<h1>{{ contact.name }}</h1>
+<p><strong>Address:</strong> {{ contact.address }}</p>
+<p><strong>Phone:</strong> {{ contact.phone }}</p>
+<p><strong>Email:</strong> {{ contact.email }}</p>
+<p><strong>Date:</strong> {{ contact.date }}</p>
+<p><strong>Ed Info:</strong> {{ contact.ed_info }}</p>
+
+<a href="{% url 'contacts:contact_update' contact.pk %}" class="btn btn-primary">Edit</a>
+<form
+  action="{% url 'contacts:contact_delete' contact.pk %}"
+  method="post"
+  style="display: inline"
+>
+  {% csrf_token %}
+  <button type="submit" class="btn btn-danger">Delete</button>
+</form>
+<a href="{% url 'contact_list' %}" class="btn btn-secondary">Back to list</a>
+{% endblock %}

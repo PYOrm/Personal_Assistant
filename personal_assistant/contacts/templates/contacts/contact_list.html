@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}Contacts{% endblock %} 
+
+{% load static %}
+{% block img %}url(&quot;{% static 'contacts.png'%}&quot;){% endblock %}
+
+{% block submenu %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12 col-lg-9">
+                <div class="mbr-section-btn align-center">
+					<a class="btn btn-secondary display-4" href="{% url 'contacts:contact_create'%}">Create new Contact</a>
+				</div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+
+<h1>Contacts</h1>
+<a href="{% url 'contacts:contact_create' %}" class="btn btn-primary mb-3"
+  >Add New Contact</a
+>
+<ul class="list-group">
+  {% for contact in contacts %}
+  <li class="list-group-item">
+    <a href="{% url 'contact_detail' contact.pk %}">{{ contact.name }}</a>
+  </li>
+  {% endfor %}
+</ul>
+{% endblock %}
