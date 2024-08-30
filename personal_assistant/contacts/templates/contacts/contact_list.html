@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% block title %}Contacts{% endblock %} 
-
 {% load static %}
 {% block img %}url(&quot;{% static 'contacts.png'%}&quot;){% endblock %}
 
@@ -17,11 +16,8 @@
 {% endblock %}
 
 {% block content %}
-
 <h1>Contacts</h1>
-<a href="{% url 'contacts:contact_create' %}" class="btn btn-primary mb-3"
-  >Add New Contact</a
->
+<a href="{% url 'contacts:contact_create' %}" class="btn btn-primary mb-3">Add New Contact</a>
 <ul class="list-group">
   {% for contact in contacts %}
   <li class="list-group-item">

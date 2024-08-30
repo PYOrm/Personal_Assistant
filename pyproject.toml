@@ -6,7 +6,7 @@ authors = ["PYOrm <ormagedon2007@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.12"
+python = "^3.10"
 django = "^5.1"
 sqlalchemy = "^2.0.32"
 crispy-bootstrap4 = "^2024.1"
