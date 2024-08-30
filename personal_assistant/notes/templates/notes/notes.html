@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block title %} User Authorization {% endblock %}
 {% load static %}
-{% block img %}url(&quot;{% static 'notes.png'%}&quot;){% endblock %}
+{% block img %}url(&quot;{% static 'notes.jpg'%}&quot;){% endblock %}
 {% block submenu %}
     <div class="container">
         <div class="row justify-content-center">
@@ -24,6 +24,7 @@
         </div>
     </div>
 
+    <!-- Відображення нотаток -->
     <div class="row mbr-masonry" data-masonry="{&quot;percentPosition&quot;: true }" style="position: relative;">
         {% for note in notes %}
         <div class="item features-without-image col-12 col-md-6 col-lg-6 active" style="position: relative;">
@@ -34,14 +35,14 @@
                     </h5>
                     <p class="card-text mbr-fonts-style display-7">
                         {{ note.body|truncatechars:50 }}
-                        <a href="{% url 'notes:detail_note' note.id %}" style="color:#ae1e2c;">Read more</a>
+                        <a href="{% url 'notes:detail_note' note.id %}">Read more</a>
                     </p>
                     <div class="icons-menu row justify-content-right display-7">
                         <p class="card-text mbr-fonts-style display-7">
                             Tags:
                         </p>
                         {% for tag in note.tags.all %}
-                            <a href="?tag={{ tag.id }}" style="color:#ae1e2c;">{{ tag.body_tag }}</a>
+                            <a href="?tag={{ tag.id }}{% if search_query %}&search={{ search_query }}{% endif %}" class="text-primary">{{ tag.body_tag }}</a>
                         {% endfor %}
                     </div>
                     <div class="icons-menu row justify-content-center display-7 mt-4">
@@ -62,19 +63,16 @@
         {% endfor %}
     </div>
 
+
     <!-- Фільтрація по тегам -->
     <div class="container">
-        <div class="row justify-content-center mb-4">
-            <div class="col-md-6">
-                <form method="GET" class="form-inline d-flex justify-content-center">
-                    {{ form.as_p }}
-                    <div class="align-center mbr-section-btn">
-                        <button type="submit" class="btn btn-info btn-rounded display-7">Filter</button>
-                    </div>
-                </form>
+        <form method="GET" class="form-inline d-flex justify-content-center">
+            {{ form.as_p }}
+            <div class="align-center mbr-section-btn">
+                <button type="submit" class="btn btn-info btn-rounded display-7">Filter</button>
             </div>
-        </div>
-    </div>
+        </form>
+    
 
     <!-- Пагінація -->
     <div class="row justify-content-center mt-4">

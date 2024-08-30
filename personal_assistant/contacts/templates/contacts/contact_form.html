@@ -1,5 +1,5 @@
-{% extends 'base.html' %} 
-{% block title %}Contact Forms{% endblock %} 
+{% extends 'base.html' %}
+{% block title %}Contact Form{% endblock %}
 {% load static %}
 
 {% block img %}url(&quot;{% static 'contacts.png'%}&quot;){% endblock %}
@@ -9,47 +9,18 @@
         <div class="row justify-content-center">
             <div class="col-md-12 col-lg-9">
                 <div class="mbr-section-btn align-center">
-                    <a class="btn btn-secondary display-4" href="{% url 'contacts:contact_create'%}">Create new Contact</a>
-                </div>
+					<a class="btn btn-secondary display-4" href="{% url 'contacts:contact_create'%}">Create new Contact</a>
+				</div>
             </div>
         </div>
     </div>
 {% endblock %}
 
-
 {% block content %}
-<div class="container">
-    <div class="row mb-5 justify-content-center">
-        <div class="col-12 mb-0 content-head">
-            <h3 class="mbr-section-title mbr-fonts-style align-center mb-0 display-2">
-                {{ form.instance.pk|yesno:"Edit Contact, New Contact" }}
-            </h3>
-        </div>
-    </div>
-
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card-box align-left">
-                <form method="post">
-                    {% csrf_token %}
-                    <div class="form-group">
-                        {{ form.as_p }}
-                    </div>
-                    <div class="icons-menu row justify-content-center display-8 mt-4">
-                        <div class="align-center mbr-section-btn">
-                            <button type="submit" class="btn btn-info btn-rounded display-8 d-flex align-items-center">
-                                Save
-                            </button>
-                        </div>
-                        <div class="align-center mbr-section-btn ml-2">
-                            <a href="{% url 'contacts:contact_list' %}" class="btn btn-secondary btn-rounded display-8 d-flex align-items-center">
-                                Cancel
-                            </a>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+  <h1>{{ form.instance.pk|yesno:"Edit Contact,New Contact" }}</h1>
+  <form method="post">
+    {% csrf_token %} {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a href="{% url 'contacts:contact_list' %}" class="btn btn-secondary">Cancel</a>
+  </form>
 {% endblock %}
