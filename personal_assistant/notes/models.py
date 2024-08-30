@@ -5,7 +5,7 @@ from users.models import User
 
 class Tag(models.Model):
     id = models.BigAutoField(primary_key=True)
-    body_tag = models.CharField(max_length=20, unique=True, null=False, blank=False) 
+    body_tag = models.CharField(max_length=20, unique=True, null=False, blank=False)
 
     def __str__(self):
         return self.body_tag
