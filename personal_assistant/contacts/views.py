@@ -8,8 +8,6 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-
-
 @login_required
 def contact_list(request):
     days = request.GET.get('days')
@@ -46,6 +44,8 @@ def contact_list(request):
         contacts = contacts.order_by('name')
 
     return render(request, 'contacts/contact_list.html', {'contacts': contacts})
+
+@login_required
 def contact_detail(request, pk):
     contact = get_object_or_404(Contact, pk=pk, owner=request.user)
     return render(request, 'contacts/contact_detail.html', {'contact': contact})
@@ -59,7 +59,6 @@ def contact_create(request):
             contact.owner = request.user
             contact.save()
             return redirect('contacts:contact_detail', pk=contact.pk) 
-
     else:
         form = ContactForm()
     return render(request, 'contacts/contact_form.html', {'form': form})
@@ -88,7 +87,7 @@ def contact_delete(request, pk):
 def upcoming_birthdays(request, days=7):
     today = date.today()
     
-    future_date = today + timedelta(days=days)
+    future_date = today + timedelta(days=7)
     contacts = Contact.objects.filter(
         date__gte=today,
         date__lte=future_date,
