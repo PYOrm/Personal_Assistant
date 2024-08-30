@@ -147,7 +147,7 @@ LOGIN_REDIRECT_URL = '/'
 # EMAIL_USE_SSL = os.getenv("EMAIL_USE_SSL")
 # EMAIL_HOST_USER = os.getenv("MAIL_HOST_USER")
 # EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
-# DEFAULT_FROM_EMAIL = EMAIL_HOST_USER("DEFAULT_FROM_EMAIL")
+# DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL")
 
 
 # to see messages in console extend of sending in throe the services
