@@ -23,5 +23,6 @@ app_name = "news"
 
 urlpatterns = [
     path('', views.index, name="index"),
+    path('new/<int:id>', views.new_detail, name="new"),
     path('our_team', views.our_team, name="our_team"),
 ]

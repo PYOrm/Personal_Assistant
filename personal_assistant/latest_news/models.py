@@ -10,6 +10,10 @@ class Forex(models.Model):
     last_update = models.DateField(auto_now_add=True)
 
 
-
 class News(models.Model):
-    pass
+    id = models.BigAutoField(primary_key=True)
+    img_url = models.TextField()
+    title = models.TextField()
+    fulltext = models.TextField()
+    date = models.TextField()
+    updated = models.DateField(auto_now=True)

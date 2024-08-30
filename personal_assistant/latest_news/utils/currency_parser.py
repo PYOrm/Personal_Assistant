@@ -1,25 +1,13 @@
-
 import requests
 from bs4 import BeautifulSoup
 
-# from personal_assistant.latest_news.models import Forex
+from latest_news.models import Forex
 
 currency_url = "https://kurs.com.ua/#main_table"
-news_url = "#"
 
 
-class Forex:
-    currency = None
-    buy = None
-    sell = None
-
-    def __str__(self):
-        return f' {self.currency}; {self.buy}; {self.sell} '
-
-
-def get_currency(url) -> list[Forex]:
+def get_currency(url):
     response = requests.get(url)
-    currency_list = list()
     if response.status_code == 200:
         bs = BeautifulSoup(response.text, 'html.parser')
         table = bs.find(id="main_table")
@@ -38,9 +26,13 @@ def get_currency(url) -> list[Forex]:
                         forex.sell = td.find("div", class_="course").text.split()[0]
                     case _:
                         pass
-            currency_list.append(forex)
-    return currency_list
+            forex.save()
 
 
-if __name__ == "__main__":
-    get_currency(currency_url)
+def delete_currency():
+    forex = Forex.objects.all()
+    forex.delete()
+
+#
+# if __name__ == "__main__":
+#     get_currency(currency_url)

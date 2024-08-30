@@ -15,6 +15,7 @@ psycopg2 = "^2.9.9"
 beautifulsoup4 = "^4.12.3"
 requests = "^2.32.3"
 datetime = "^5.5"
+apscheduler = "^3.10.4"
 
 
 [build-system]
