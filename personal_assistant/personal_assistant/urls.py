@@ -27,7 +27,7 @@ urlpatterns = [
     path('contacts/', include("contacts.urls")),  # Доданий шлях для додатку 'contacts'
 ]
  
- """
+"""
 URL configuration for personal_assistant project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -51,10 +51,7 @@ urlpatterns = [
     path('', include("latest_news.urls")),
     path('notes/', include('notes.urls')),
     path('users/', include("users.urls")),  # Виправлений шлях
-<<<<<<< contacts
     path('accounts/', include('django.contrib.auth.urls')),
     path('contacts/', include("contacts.urls")),  # Доданий шлях для додатку 'contacts'
-=======
-    path('accounts/', include('django.contrib.auth.urls'))
->>>>>>> dev
+    path('fileshare/', include('fileshare.urls')),
 ]

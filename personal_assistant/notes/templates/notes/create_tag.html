@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block title %} Create Tag {% endblock %}
 {% load static %}
-{% block img %}url(&quot;{% static 'notes.jpg'%}&quot;){% endblock %}
+{% block img %}url(&quot;{% static 'notes.png'%}&quot;){% endblock %}
 {% block submenu %}
     <div class="container">
         <div class="row justify-content-center">
@@ -30,8 +30,9 @@
                 <form method="POST" class="mbr-form form-with-styler" data-form-title="Form Name">
                     {% csrf_token %}
                     {{ form.as_p }} 
-                    <div class="align-center mbr-section-btn">
-                        <button type="submit" class="btn btn-info display-7">Create Tag</button>
+                    <div class="align-left mbr-section-btn">
+                        <button type="submit" class="btn btn-info display-8">Create Tag</button>
+                        <a href="{% url 'notes:notes' %}" class="btn btn-secondary btn-rounded display-8">Back to Notes</a>
                     </div>
                 </form>
             </div>
