@@ -24,9 +24,9 @@ class NotesView(LoginRequiredMixin, ListView):
             queryset = queryset.filter(tags__id=tag)
         
         if search_query:
-            queryset = queryset.filter(body__icontains=search_query)
+            queryset = queryset.filter(title__icontains=search_query)
         
-        return queryset.order_by('id')
+        return queryset.order_by('title')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

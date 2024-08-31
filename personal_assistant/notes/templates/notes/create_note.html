@@ -15,7 +15,6 @@
                 </div>
             </div>
         </div>
-    </div>
 {% endblock %}
 
 {% block content %}
@@ -24,8 +23,9 @@
         {% csrf_token %}
         {{ form.as_p }}
         <div class="align-left mbr-section-btn">
-        <button type="submit" class="btn btn-info btn-rounded display-8 d-flex align-items-center">Save</button>
+            <button type="submit" class="btn btn-info me-2">Save changes</button>
+            <a href="{% url 'notes:notes' %}" class="btn btn-secondary btn-rounded display-8">Cancel</a>
         </div>
-    </form>
+            </form>
 </div>
 {% endblock %}
