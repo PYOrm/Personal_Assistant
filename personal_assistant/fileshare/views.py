@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from .models import File
 from .forms import FileUploadForm
+from django.contrib.auth.decorators import login_required
 
 @login_required
 def index(request):
@@ -39,4 +40,8 @@ def delete(request, file_id):
     file = get_object_or_404(File, id=file_id)
     file.delete()
     return redirect('fileshare:index')
+
+@login_required
+def file_list(request):
+    return render(request, 'file_list.html')
 
