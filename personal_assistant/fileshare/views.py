@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from .models import File
 from .forms import FileUploadForm
 
+@login_required
 def index(request):
     category = request.GET.get('category')
     if category:
@@ -12,6 +13,8 @@ def index(request):
 
     return render(request, 'fileshare.html', {'files': files})
 
+  
+@login_required
 def upload(request):
     if request.method == 'POST':
         form = FileUploadForm(request.POST, request.FILES)
@@ -21,13 +24,17 @@ def upload(request):
     else:
         form = FileUploadForm()
     return render(request, 'fileshare.html', {'form': form})
-
+  
+  
+@login_required
 def download(request, file_id):
     file = get_object_or_404(File, id=file_id)
     response = HttpResponse(file.file, content_type='application/octet-stream')
     response['Content-Disposition'] = f'attachment; filename="{file.name}"'
     return response
-
+  
+  
+@login_required
 def delete(request, file_id):
     file = get_object_or_404(File, id=file_id)
     file.delete()
