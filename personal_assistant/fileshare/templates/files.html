@@ -1,60 +1,63 @@
 {% extends 'base.html' %}
+{% block title %}Files{% endblock %}
+
 {% load static %}
-{% block title %}File Share{% endblock %}
-{% block img %}url(&quot;{% static 'fileshare.png'%}&quot;){% endblock %}
+{% block img %}url(&quot;{% static 'contacts.png'%}&quot;){% endblock %}
+
 {% block submenu %}
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-12 col-lg-9">
-                <div class="mbr-section-btn align-center">
-                    <form action="/action_page.php">
-                        <input type="file" id="myFile" name="filename">
-                        <input type="submit">
-                        <button type="submit" class="btn btn-info display-7">Upload</button>
-                    </form>
-                </div>
+<div class="container">
+    <div class="container d-flex justify-content-center"><h2> file upload </h2></div>
+    <div class="align-center mbr-section-btn d-flex justify-content-center">
+        <form action="{% url 'fileshare:upload' %}" method="post" enctype="multipart/form-data" class="form-inline d-flex align-items-center ml-2">
+            {% csrf_token %}
+            <div class="d-flex justify-content-end align-items-center">
+                <input type="file" name="file" class="form-control mr-2">
+                <select name="category" class="form-control mr-2">
+                    <option value="image">Image</option>
+                    <option value="document">Document</option>
+                    <option value="video">Video</option>
+                    <option value="other">Other</option>
+                </select>
+                <button type="submit" class="btn btn-primary ml-2">Upload</button>
             </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-md-12 col-lg-9">
-                <div class="mbr-section-btn align-center">
-                    TODO search file name and filter file type
-                </div>
-            </div>
-        </div>
+        </form>
     </div>
+</div>    
 {% endblock %}
+
 {% block content %}
-<div class="row justify-content-center">
-      <div class="card col-md-12 col-lg-12">
-        <div class="card-wrapper">
-          <div class="row justify-content-center">
-            <div class="col-12 mb-5 content-head">
-              <h3 class="card-title mbr-fonts-style mbr-white mt-3 display-2"><strong>Files:</strong></h3>
+<div style="border-bottom: 2px solid black; margin-bottom: 10px;"></div>
+<div class="container">
+    <div class="container d-flex justify-content-center"><h2> file list </h2></div>
+    <div class="align-center mbr-section-btn d-flex justify-content-center">
+        <!-- Форма фільтрації -->
+        <form action="{% url 'fileshare:index' %}" method="get" class="form-inline d-flex align-items-center ml-2">
+            <div class="form-group mb-2">
+                <label class="sr-only" for="days">Категорія:</label>
+                <select name="category" onchange="this.form.submit()" class="form-control mr-2">
+                    <option value="" {% if not selected_category %}selected{% endif %}>All</option>
+                    <option value="image" {% if selected_category == 'image' %}selected{% endif %}>Images</option>
+                    <option value="document" {% if selected_category == 'document' %}selected{% endif %}>Documents</option>
+                    <option value="video" {% if selected_category == 'video' %}selected{% endif %}>Videos</option>
+                    <option value="other" {% if selected_category == 'other' %}selected{% endif %}>Other</option>
+                </select>
             </div>
-          </div>
-            {% for file in files %}
-          <div class="row justify-content-left item features-without-image mt-0 mb-5">
-            <div class="col-12 col-md-12 col-lg-3">
-                <div class="img-wrapper mt-4 mb-2">
-                    <img src="{% static 'graphics/TeamLogo.png'%}" data-slide-to="2" data-bs-slide-to="1" alt="">
-                </div>
-            </div>
-            <div class="col-md-12 col-lg item-wrapper">
-              <p class="mbr-text mbr-fonts-style mt-0 mb-0 display-7">
-                  {{file.name}}
-              </p>
-              <div class="soc-item col-auto">
-                  <a href="{% url 'fileshare:download' %}" target="_blank" class="social__link" download>
-                     <span class="mbr-iconfont mobi-mbri-download-2 mobi-mbri"></span>
-                  </a>
-              </div>
-            </div>
-          </div>
-            {% endfor %}
-
-        </div>
-      </div>
+        </form>
     </div>
-{% endblock %}
 
+    <div class="list-group">
+        {% for file in files %}
+        <div class="list-group-item d-flex justify-content-between align-items-center">
+            <span>{{ file.file_name }}</span>
+            <div>
+                <a class="btn btn-info btn-rounded me-2" href="{% url 'fileshare:download' file.box_file_id %}">Download</a>
+                <a class="btn btn-danger btn-rounded" href="{% url 'fileshare:delete' file.box_file_id %}">Delete</a>
+            </div>
+        </div>
+        {% empty %}
+        <div class="list-group-item">Файлів не знайдено</div>
+        {% endfor %}
+    </ul>
+
+</div>
+{% endblock %}

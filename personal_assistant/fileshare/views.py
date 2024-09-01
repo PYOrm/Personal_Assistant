@@ -20,7 +20,7 @@ def index(request):
         files = File.objects.filter(category=category, user=request.user)
     else:
         files = File.objects.filter(user=request.user)
-    return render(request, 'fileshare.html', {'files': files, 'selected_category': category})
+    return render(request, 'files.html', {'files': files, 'selected_category': category})
 
   
 @login_required
@@ -43,7 +43,7 @@ def upload(request):
             return redirect('fileshare:index')
     else:
         form = FileUploadForm()
-    return render(request, 'fileshare.html', {'form': form})
+    return render(request, 'files.html', {'form': form})
   
   
 @login_required
@@ -63,10 +63,6 @@ def delete(request, box_file_id):
     client.files.delete_file_by_id(file.box_file_id)
     file.delete()
     return redirect('fileshare:index')
-
-@login_required
-def file_list(request):
-    return render(request, 'file_list.html')
 
 # remove this endpoint on production
 # it is a hack to update box dev token in a quick way
