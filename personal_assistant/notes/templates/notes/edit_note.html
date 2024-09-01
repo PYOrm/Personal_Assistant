@@ -20,13 +20,20 @@
 
 {% block content %}
     <div class="container">
-        <h2>Edit Note</h2>
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <div class="align-left mbr-section-btn">
-                <button type="submit" class="btn btn-info me-2">Save changes</button>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card-box align-left">
+                    <h2>Edit Note</h2>
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <div class="align-left mbr-section-btn">
+                            <button type="submit" class="btn btn-info me-2">Save changes</button>
+                            <a href="{% url 'notes:notes' %}" class="btn btn-secondary btn-rounded display-8">Cancel</a>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </form>
+        </div>                    
     </div>
 {% endblock %}

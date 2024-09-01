@@ -16,5 +16,4 @@ def start():
     scheduler = BackgroundScheduler()
     scheduler.add_job(run_parsers, 'interval', minutes=1440)
     scheduler.start()
-    # print("1")
 

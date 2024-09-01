@@ -1,0 +1,50 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Share</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>File Share</h1>
+        </header>
+
+        <div class="submenu">
+            <form action="{% url 'fileshare:upload' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="file" name="file">
+                <button type="submit">Upload</button>
+            </form>
+
+            <form action="{% url 'fileshare:index' %}" method="get">
+                <select name="category" onchange="this.form.submit()">
+                    <option value="">All</option>
+                    <option value="image">Images</option>
+                    <option value="document">Documents</option>
+                    <option value="video">Videos</option>
+                </select>
+            </form>
+        </div>
+
+        <div class="content">
+                <ul>
+                {% for file in files %}
+                <li>
+                    <a href="{% url 'fileshare:download' file.id %}">{{ file.name }}</a>
+                    ({{ file.category }})
+                    <a href="{% url 'fileshare:delete' file.id %}" onclick="return confirm('Are you sure you want to delete this file?');">Delete</a>
+                </li>
+                {% empty %}
+                <p>No files available.</p>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
