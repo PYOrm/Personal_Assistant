@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
         ),
         migrations.AddField(
             model_name='file',
-            name='box_file_name',
+            name='box_file_id',
             field=models.CharField(default='defult', max_length=120),
             preserve_default=False,
         ),

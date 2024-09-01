@@ -11,7 +11,7 @@ class File(models.Model):
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     file_name = models.CharField(max_length=120)
-    box_file_name = models.CharField(max_length=120)
+    box_file_id = models.CharField(max_length=120)
     category = models.CharField(max_length=10, choices=CATEGORY_CHOICES)
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
