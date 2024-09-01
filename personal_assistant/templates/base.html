@@ -64,7 +64,7 @@
 <!--                        <div class="img-wrapper mt-4 mb-2">-->
 <!--							<img src="{% static 'graphics/TeamLogo.png'%}" data-slide-to="2" data-bs-slide-to="1" alt="">-->
 <!--						</div>-->
-                        <p class="card-title mbr-fonts-style display-7">
+                        <p class="display-7" style="margin: 0px; margin-right: 10px; color: aliceblue;">
                             {{user.username}}
 						</p>
                     {% if user.avatar_url %}
@@ -74,7 +74,7 @@
                     {% endif %}
                         <form method="post" action="{% url 'users:logout' %}">
                             {% csrf_token %}
-                            <button type="submit" class="btn btn-sm display-4">Logout</button>
+                            <button type="submit" class="btn btn-sm display-4" style="color: aliceblue;">Logout</button>
                         </form>
                     {% else %}
                         <a class="btn btn-white display-4" href="{% url 'users:login' %}">Login</a>

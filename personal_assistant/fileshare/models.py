@@ -16,4 +16,4 @@ class File(models.Model):
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.file.name} ({self.category})"
+        return f"{self.file.file_name} ({self.category})"
