@@ -19,15 +19,21 @@
             <form action="{% url 'fileshare:upload' %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <input type="file" name="file">
-                <button type="submit">Upload</button>
-            </form>
-
-            <form action="{% url 'fileshare:index' %}" method="get">
-                <select name="category" onchange="this.form.submit()">
-                    <option value="">All</option>
+                <select name="category">
                     <option value="image">Images</option>
                     <option value="document">Documents</option>
                     <option value="video">Videos</option>
+                    <option value="other">Other</option>
+                </select>
+                <button type="submit">Upload</button>
+            </form>
+            <form action="{% url 'fileshare:index' %}" method="get">
+                <select name="category" onchange="this.form.submit()">
+                    <option value="" {% if not selected_category %}selected{% endif %}>All</option>
+                    <option value="image" {% if selected_category == 'image' %}selected{% endif %}>Images</option>
+                    <option value="document" {% if selected_category == 'document' %}selected{% endif %}>Documents</option>
+                    <option value="video" {% if selected_category == 'video' %}selected{% endif %}>Videos</option>
+                    <option value="other" {% if selected_category == 'other' %}selected{% endif %}>Other</option>
                 </select>
             </form>
         </div>
