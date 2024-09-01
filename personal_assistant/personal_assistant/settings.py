@@ -142,7 +142,6 @@ ACCOUNT_EMAIL_REQUIRED = True
 LOGIN_REDIRECT_URL = '/'
 
 
-
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # EMAIL_HOST = os.getenv("EMAIL_HOST")
 # EMAIL_PORT = os.getenv("EMAIL_PORT")
@@ -153,5 +152,5 @@ LOGIN_REDIRECT_URL = '/'
 # DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL")
 
 
-# to see messages in console extend of sending in throe the services
+# to see messages in console instead of sending them through a service
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
