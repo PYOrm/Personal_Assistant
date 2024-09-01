@@ -30,11 +30,11 @@ def get_news(url, page):
             for row in rows:
                 new = News()
                 new.fulltext, new.img_url = get_new_detail(base_url + row.find("a")["href"])
+                new.small_img_url = base_url + row.find('div', class_="visual").find("img")["src"]
                 det = row.find('div', class_="info")
                 new.title = det.find("span").text
                 new.date = det.find("em").text
                 new.save()
-                # print(new.title)
             get_news(url, page + 1)
 
 
