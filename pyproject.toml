@@ -16,6 +16,7 @@ beautifulsoup4 = "^4.12.3"
 requests = "^2.32.3"
 datetime = "^5.5"
 apscheduler = "^3.10.4"
+box-sdk-gen = "^1.4.1"
 
 
 [build-system]
