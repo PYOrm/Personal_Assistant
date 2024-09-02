@@ -1,0 +1,61 @@
+{% extends 'base.html' %} 
+{% block title %}Contact Details{% endblock %} 
+{% load static %}
+
+{% block img %}url(&quot;{% static 'contacts.png'%}&quot;){% endblock %}
+
+{% block submenu %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12 col-lg-9">
+                <div class="mbr-section-btn align-center">
+                    <a class="btn btn-secondary display-4" href="{% url 'contacts:contact_create'%}">Create new Contact</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row mb-5 justify-content-center">
+        <div class="col-12 mb-0 content-head">
+            <h3 class="mbr-section-title mbr-fonts-style align-center mb-0 display-2">
+                <a href="{% url 'contacts:contact_list' %}" style="color:#0aa3c2;">Contact Details</a>
+            </h3>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card-box align-left">
+                <h4 class="card-title mbr-fonts-style display-5"><strong>{{ contact.name }}</strong></h4>
+                <p><strong>№:</strong> {{ contact.id }}</p>
+                <p><strong>Address:</strong> {{ contact.address }}</p>
+                <p><strong>Phone:</strong> {{ contact.phone }}</p>
+                <p><strong>Email:</strong> {{ contact.email }}</p>
+                <p><strong>Date:</strong> {{ contact.date|date:"d.m.Y" }}</p>
+                <p><strong>Ed Info:</strong> {{ contact.ed_info }}</p>
+                
+                <div class="icons-menu row justify-content-center display-7 mt-4">
+                    <div class="align-center mbr-section-btn">
+                        <a href="{% url 'contacts:contact_update' contact.pk %}" class="btn btn-info btn-rounded display-7 d-flex align-items-center">
+                            Edit
+                        </a>
+                    </div>
+                    <div class="align-center mbr-section-btn ml-2">
+                        <a href="{% url 'contacts:contact_delete' contact.pk %}" class="btn btn-danger btn-rounded display-7 d-flex align-items-center">
+                            Delete
+                        </a>
+                    </div>
+                    <div class="align-center mbr-section-btn ml-2">
+                        <a href="{% url 'contacts:contact_list' %}" class="btn btn-secondary display-7 d-flex align-items-center">
+                            Back to list
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

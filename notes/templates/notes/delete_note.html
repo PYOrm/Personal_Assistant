@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}Delete Note{% endblock %}
+{% load static %}
+
+{% block img %}url(&quot;{% static 'notes.jpg' %}&quot;){% endblock %}
+
+{% block submenu %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12 col-lg-9">
+                <div class="mbr-section-btn align-center">
+                    <a class="btn btn-secondary display-4" href="{% url 'notes:notes' %}">Notes</a>
+                    <a class="btn btn-secondary display-4" href="{% url 'notes:create_tag' %}">Create new Tag</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Are you sure you want to delete "<strong>{{ object.title }}.</strong> {{ object }}"?</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="align-left mbr-section-btn">
+            <button type="submit" class="btn btn-danger">Confirm</button>
+            <a href="{% url 'notes:notes' %}" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
