@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "personal-assistant"
+version = "0.1.0"
+description = ""
+authors = ["PYOrm <ormagedon2007@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+django = "^5.1"
+sqlalchemy = "^2.0.32"
+crispy-bootstrap4 = "^2024.1"
+python-dotenv = "^1.0.1"
+psycopg2 = "^2.9.9"
+beautifulsoup4 = "^4.12.3"
+requests = "^2.32.3"
+datetime = "^5.5"
+apscheduler = "^3.10.4"
+box-sdk-gen = "^1.4.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

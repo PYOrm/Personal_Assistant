@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% block title %}Contacts{% endblock %}
+
+{% load static %}
+{% block img %}url(&quot;{% static 'contacts.png'%}&quot;){% endblock %}
+
+{% block submenu %}
+    <div class="container">
+        <div class="align-center mbr-section-btn d-flex justify-content-center">
+            <!-- Форма пошуку за іменем -->
+            <form method="get" class="form-inline d-flex align-items-center">
+                <div class="form-group mb-2">
+                    <a class="btn btn-info btn-rounded display-8 mr-2" href="{% url 'contacts:contact_create'%}">Create new Contact</a>
+                    <label class="sr-only" for="search">Search contacts by name:</label>
+                    <input type="text" name="search" id="search" class="form-control mr-2" placeholder="Search by name" value="{{ request.GET.search }}" style="max-width: 250px;">
+                    <button type="submit" class="btn btn-info btn-rounded display-8">Search</button>
+                </div>
+            </form>
+
+            <!-- Форма фільтрації за днями -->
+            <form method="get" class="form-inline d-flex align-items-center ml-2">
+                <div class="form-group mb-2">
+                    <label class="sr-only" for="days">Show contacts with birthdays in the next:</label>
+                    <input type="number" name="days" id="days" class="form-control mr-2" placeholder="Enter number of days" min="1" required style="max-width: 250px;">
+                    <button type="submit" class="btn btn-info btn-rounded display-8">Filter</button>
+                </div>
+            </form>
+
+            <!-- Кнопка скасування -->
+            <a href="{% url 'contacts:contact_list' %}" class="btn btn-secondary btn-rounded display-8 mb-3 ml-2">Cancel</a>
+        </div>
+    </div>    
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row mb-5 justify-content-center">
+        <div class="col-12 mb-0 content-head">
+            <h3 class="mbr-section-title mbr-fonts-style align-center mb-0 display-2">
+                <a href="{% url 'contacts:contact_list' %}" style="color:#0aa3c2;">Contacts</a>				
+            </h3>
+        </div>
+    </div>
+
+
+    <!-- Список контактів -->
+    <ul class="list-group">
+        {% for contact in contacts %}
+        <li class="list-group-item" style="border-radius: 40px; margin-bottom: 10px;">
+            <a href="{% url 'contacts:contact_detail' contact.pk %}">
+                {{ contact.id }}. {{ contact.name }}, {{ contact.date }}
+            </a>
+        </li>
+        {% empty %}
+        <li class="list-group-item" style="border-radius: 40px; margin-bottom: 10px;">
+            No contacts found.
+        </li>
+        {% endfor %}
+    </ul>
+
+</div>
+
+
+    <!-- Пагінація -->
+    <div class="row justify-content-center mt-4">
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page=1{% if request.GET.tag %}&tag={{ request.GET.tag }}{% endif %}{% if search_query %}&search={{ search_query }}{% endif %}">First</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if request.GET.tag %}&tag={{ request.GET.tag }}{% endif %}{% if search_query %}&search={{ search_query }}{% endif %}">Previous</a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled"><a class="page-link">First</a></li>
+                    <li class="page-item disabled"><a class="page-link">Previous</a></li>
+                {% endif %}
+
+                {% for num in page_obj.paginator.page_range %}
+                    {% if page_obj.number == num %}
+                        <li class="page-item active"><a class="page-link">{{ num }}</a></li>
+                    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ num }}{% if request.GET.tag %}&tag={{ request.GET.tag }}{% endif %}{% if search_query %}&search={{ search_query }}{% endif %}">{{ num }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}{% if request.GET.tag %}&tag={{ request.GET.tag }}{% endif %}{% if search_query %}&search={{ search_query }}{% endif %}">Next</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}{% if request.GET.tag %}&tag={{ request.GET.tag }}{% endif %}{% if search_query %}&search={{ search_query }}{% endif %}">Last</a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled"><a class="page-link">Next</a></li>
+                    <li class="page-item disabled"><a class="page-link">Last</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+</div>
+{% endblock %}

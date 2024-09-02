@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}News{% endblock %}
+{% block img %}url(&quot;{% static 'news.jpg'%}&quot;){% endblock %}
+{% block submenu %}
+ <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12 col-lg-9">
+                <div class="mbr-section-btn align-center">
+                    <a class="btn btn-secondary display-4" href="{% url 'news:index'%}">Return</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+      <div mbr-class2="this | fakeFilter uname__61 _params.columns" class="item features-without-image col-12 col-md-9 item-mb col-lg-9">
+        <div class="item-wrapper">
+          <div class="card-box align-left">
+            <h5 class="card-title mbr-fonts-style display-5" mbr-if="this | fakeFilter uname__67 _params.showTitle" data-app-selector=".card-title, .iconfont-wrapper" mbr-class-var="uname__65" mbr-on-change-theme-style="uname__66" data-app-edit="content" mbr-static-html="uname__68" mbr-content-edit="uname__68" data-app-placeholder="Введите Текст" mbr-on-change-component-node="uname__69" data-class-var="display-5">
+              <b>News</b>
+            </h5>
+                  <p class="card-text mbr-fonts-style display-7" mbr-if="this | fakeFilter uname__72 _params.showText" data-app-selector=".card-text, .item .mbr-section-btn" mbr-class-var="uname__70" mbr-on-change-theme-style="uname__71" data-app-edit="content" mbr-static-html="uname__73" mbr-content-edit="uname__73" data-app-placeholder="Введите Текст" mbr-on-change-component-node="uname__74" data-class-var="display-7">
+                      <div class="print_container">
+                        <h1 data-vr-headline="">{{new.title}}</h1>
+                        <header class="article-head">
+                            <span class="date">{{new.date}}</span>
+                        </header>
+                        <div class="item analitic_image" itemscope="" itemtype="http://schema.org/ImageObject">
+                            <img alt={{new.title}} src="{{new.img_url}}" class="article_picture" style ="width:auto; height:auto;">
+                        </div>
+                        <div itemprop="description" id="article_content">
+                            <p style="line-height: 2">{{new.fulltext}}</p>
+                        </div>
+                      </div>
+                  </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+{% endblock %}

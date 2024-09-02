@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Note{% endblock %}
+{% load static %}
+
+{% block img %}url(&quot;{% static 'notes.jpg' %}&quot;){% endblock %}
+
+{% block submenu %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12 col-lg-9">
+                <div class="mbr-section-btn align-center">
+                    <a class="btn btn-secondary display-4" href="{% url 'notes:notes' %}">Notes</a>
+                    <a class="btn btn-secondary display-4" href="{% url 'notes:create_tag' %}">Create new Tag</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card-box align-left">
+                    <h2>Edit Note</h2>
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <div class="align-left mbr-section-btn">
+                            <button type="submit" class="btn btn-info me-2">Save changes</button>
+                            <a href="{% url 'notes:notes' %}" class="btn btn-secondary btn-rounded display-8">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>                    
+    </div>
+{% endblock %}
