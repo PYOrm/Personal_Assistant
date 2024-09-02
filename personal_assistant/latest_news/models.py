@@ -13,6 +13,7 @@ class Forex(models.Model):
 class News(models.Model):
     id = models.BigAutoField(primary_key=True)
     img_url = models.TextField()
+    small_img_url = models.TextField()
     title = models.TextField()
     fulltext = models.TextField()
     date = models.TextField()

@@ -19,7 +19,7 @@
 
 {% block content %}
 <div class="container">
-    <h2>Are you sure you want to delete "<strong>{{ object }}</strong>"?</h2>
+    <h2>Are you sure you want to delete "<strong>{{ object.title }}.</strong> {{ object }}"?</h2>
     <form method="post">
         {% csrf_token %}
         <div class="align-left mbr-section-btn">

@@ -52,18 +52,24 @@
                     <div class="news-list news-table ">
                       <ul data-vr-zone="all">
                         {% for new in news %}
-                        <li>
-                          <a href="{% url 'news:new' new.id %}">
-                            <div class="visual">
-                              <img src="{{ new.img_url }}" alt="{{ new.title }}" height="100" width="100">
-                            </div>
-                            <span class="news-title for-mobile" data-vr-headline="">{{ new.title }}</span>
-                            <div class="info" style="display:block;">
-                              <span class="news-title" data-vr-headline="">{{ new.title }}</span>
-                              <em class="date">{{ new.date }}</em>
-                              <p>{{ new.fulltext|truncatechars:50 }}</p>
-                            </div>
-                          </a>
+                        <li style=" padding-bottom: 10px; marker:none;">
+                          <div class="row">
+                            <a href="{% url 'news:new' new.id %}" style="
+                                                                  display: flex;
+                                                                  align-items: center;
+                                                                  align-content: center;
+                                                                  justify-content: center;
+                                                              ">
+                              <div class="visual" style="min-height:100px; min-width:100px; margin-right: 20px;">
+                                <img src="{{ new.small_img_url }}" alt="{{ new.title }}" height="100px;" width="100px;">
+                              </div>
+                              <div class="info col" style="display: flex;align-items: center;flex-direction: column;">
+                                  <span class="display-7" data-vr-headline="">{{ new.title }}</span>
+                                  <em class="col" style="margin-bottom: 20px;">{{ new.date }}</em>
+                                  <p style="margin-top: 10px; ">{{ new.fulltext|truncatechars:150 }}</p>
+                              </div>
+                            </a>
+                          </div>
                         </li>
                         {% endfor %}
                       </ul>
