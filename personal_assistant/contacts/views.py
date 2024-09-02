@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
+from django.core.paginator import Paginator
+from django.shortcuts import render
 from .models import Contact
 from .forms import ContactForm
 from datetime import date, timedelta
@@ -29,7 +31,6 @@ def contact_list(request):
         contacts = contacts.filter(name__icontains=search_query)
 
     if days:
-        
         filtered_contacts = []
         for contact in contacts:
             if contact.date:
@@ -46,7 +47,16 @@ def contact_list(request):
     else:
         contacts = contacts.order_by('name')
 
-    return render(request, 'contacts/contact_list.html', {'contacts': contacts})
+    
+    paginator = Paginator(contacts, 10)  
+    page_number = request.GET.get('page')  
+    page_obj = paginator.get_page(page_number)  
+
+    return render(request, 'contacts/contact_list.html', {
+        'contacts': page_obj,  
+        'page_obj': page_obj,  
+        'search_query': search_query,  
+    })
 def contact_detail(request, pk):
 
     contact = get_object_or_404(Contact, pk=pk, owner=request.user)
