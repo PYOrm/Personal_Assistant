@@ -48,6 +48,7 @@ def contact_list(request):
 
     return render(request, 'contacts/contact_list.html', {'contacts': contacts})
 def contact_detail(request, pk):
+
     contact = get_object_or_404(Contact, pk=pk, owner=request.user)
     return render(request, 'contacts/contact_detail.html', {'contact': contact})
 
@@ -68,13 +69,17 @@ def contact_create(request):
 @login_required
 def contact_update(request, pk):
     contact = get_object_or_404(Contact, pk=pk, owner=request.user)
+    
     if request.method == 'POST':
         form = ContactForm(request.POST, instance=contact)
         if form.is_valid():
             form.save()
             return redirect('contacts:contact_detail', pk=contact.pk)
+        else:
+            print(form.errors)  # Виводить помилки форми, якщо вони є
     else:
         form = ContactForm(instance=contact)
+
     return render(request, 'contacts/contact_form.html', {'form': form})
 
 @login_required
