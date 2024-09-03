@@ -6,6 +6,5 @@ class LatestNewsConfig(AppConfig):
     name = 'latest_news'
 
     def ready(self):
-        if __name__ == "latest_news.apps":
-            from latest_news.utils import updater
-            updater.start()
+        # Import signal handlers
+        import latest_news.signals
