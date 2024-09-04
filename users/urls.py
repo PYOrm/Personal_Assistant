@@ -19,6 +19,6 @@ urlpatterns = [
     path('reset-password/complete/',
          PasswordResetCompleteView.as_view(template_name='users/password_reset_complete.html'),
          name='password_reset_complete'),
-    path('verify_email/<uidb64>/<token>/', views.EmailVerify.as_view(), name='verify_email')
+    # path('verify_email/<uidb64>/<token>/', views.EmailVerify.as_view(), name='verify_email')
 
 ]

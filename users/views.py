@@ -10,7 +10,6 @@ from django.utils.http import urlsafe_base64_decode
 import hashlib
 
 from django.views import View
-from .utils import send_email_for_verify
 from django.urls import reverse_lazy
 
 from .forms import RegisterForm, AuthenticationForm
@@ -24,10 +23,10 @@ def register(request):
         form = RegisterForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
-            # user.is_active = True
+            user.is_active = True
             user.avatar_url = get_gravatar_url(user.email)
             user.save()
-            send_email_for_verify(request, user)
+            # send_email_for_verify(request, user)
             return redirect('users:login')
     else:
         form = RegisterForm()
@@ -54,21 +53,5 @@ class ResetPasswordView(SuccessMessageMixin, PasswordResetView):
     success_message = "An email with instructions to reset your password has been sent to %(email)s."
     subject_template_name = 'users/password_reset_subject.txt'
 
-class EmailVerify(View):
-    def get(self, request, uidb64, token):
-        User = get_user_model()
-        try:
-            uid = urlsafe_base64_decode(uidb64).decode()
-            user = User.objects.get(pk=uid)
-        except (TypeError, ValueError, OverflowError, User.DoesNotExist):
-            user = None
 
-        if user is not None and token_generator.check_token(user, token):
-            user.is_active = True
-            user.save()
-            messages.success(request, 'Email verified successfully. You can now log in.')
-            return redirect('users:login')
-        else:
-            messages.error(request, 'Verification link is invalid or expired.')
-            return redirect('users:register')
 
