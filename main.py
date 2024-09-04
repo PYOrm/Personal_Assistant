@@ -2,7 +2,7 @@ from multiprocessing import Process
 import os 
 
 def runserver():
-    os.system('python manage.py runserver')
+    os.system('python manage.py runserver 0.0.0.0:8000')
 
 def process_tasks():
     os.system('python manage.py process_tasks')
