@@ -1,0 +1,1 @@
+default_app_config='latest_news.apps.LatestNewsConfig'
