@@ -29,6 +29,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*', 'cute-marie-ann-rehina-99362d2b.koyeb.app']
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://cute-marie-ann-rehina-99362d2b.koyeb.app',
+    # Add other trusted origins if necessary
+]
+
 # Application definition
 
 INSTALLED_APPS = [
