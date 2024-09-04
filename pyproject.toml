@@ -11,12 +11,13 @@ django = "^5.1"
 sqlalchemy = "^2.0.32"
 crispy-bootstrap4 = "^2024.1"
 python-dotenv = "^1.0.1"
-psycopg2 = "^2.9.9"
 beautifulsoup4 = "^4.12.3"
 requests = "^2.32.3"
 datetime = "^5.5"
 box-sdk-gen = "^1.4.1"
 django-background-tasks = "^1.2.8"
+psycopg2-binary = "^2.9.9"
+gunicorn = "^23.0.0"
 
 
 [build-system]
