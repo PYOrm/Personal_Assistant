@@ -5,8 +5,9 @@ import time
 
 @background()
 def run_parsers():
+    print("parsers run")
     delete_currency()
     delete_news()
-    get_news(news_url, 1)
     get_currency(currency_url)
+    get_news(news_url, 1)
 
