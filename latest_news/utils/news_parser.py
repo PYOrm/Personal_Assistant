@@ -21,14 +21,12 @@ base_url = "https://podrobnosti.ua"
 
 
 def get_news(url, page):
-    print(f"news_link: '{url + str(page)}'")
     response = requests.get(url + str(page))
     print(response.status_code)
     if response.status_code == 200:
         bs = BeautifulSoup(response.text, 'html.parser')
         table = bs.find(class_="news-list news-table")
         rows = table.find_all("li")
-        print(rows)
         if rows:
             for row in rows:
                 new = News()
@@ -37,11 +35,7 @@ def get_news(url, page):
                 det = row.find('div', class_="info")
                 new.title = det.find("span").text
                 new.date = det.find("em").text
-                print(new)
-                print("try save new")
                 new.save()
-                print("new saved")
-            print("call next get_news")
             get_news(url, page + 1)
 
 
