@@ -31,7 +31,7 @@ ALLOWED_HOSTS = ['*']
 
 CSRF_TRUSTED_ORIGINS = [
     'https://cute-marie-ann-rehina-99362d2b.koyeb.app',
-    'https://delighted-kyle-pyorm-0cb783ac.koyeb.app/',
+    'https://delighted-kyle-pyorm-0cb783ac.koyeb.app',
     # Add other trusted origins if necessary
 ]
 
