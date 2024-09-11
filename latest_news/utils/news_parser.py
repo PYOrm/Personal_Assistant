@@ -21,6 +21,7 @@ base_url = "https://podrobnosti.ua"
 
 
 def get_news(url, page):
+    print(f"news_link: '{url + str(page)}'")
     response = requests.get(url + str(page))
     if response.status_code == 200:
         bs = BeautifulSoup(response.text, 'html.parser')
