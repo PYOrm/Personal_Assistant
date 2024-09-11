@@ -8,4 +8,4 @@ from datetime import datetime
 def schedule_update_task(sender, **kwargs):
     if not Task.objects.filter(task_name='latest_news.utils.updater.run_parsers').exists():
         run_parsers(schedule=datetime.now())  
-        run_parsers(repeat=60*60)  
+        run_parsers(repeat=3600)  
